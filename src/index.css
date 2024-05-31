@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.circular-button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.bg-yellow {
+  background-color: #FFC107 !important;
+}
