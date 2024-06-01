@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate , Link } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import LabelInput from '../components/LabelInput';
 import { useAuth } from '../contexts/Auth.context';
 import Error from '../components/Error';
+import '../index.css';
 
 const validationRules = {
   email: {
@@ -15,24 +16,14 @@ const validationRules = {
 };
 
 export default function Login() {
-  const {login, error, loading} = useAuth();
+  const { login, error, loading } = useAuth();
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  const methods = useForm({
-    defaultValues: {
-      email: 'thomas.aelbrecht@hogent.be',
-      password: '12345678'
-    }
-  });
+  const methods = useForm();
   const {
-    reset,
     handleSubmit
   } = methods;
-
-  const handleCancel = useCallback(() => {
-    reset();
-  }, [reset]);
 
 
   const handleLogin = useCallback(
@@ -53,51 +44,56 @@ export default function Login() {
   return (
     <FormProvider {...methods}>
       <div className='container'>
-        <form
-          onSubmit={handleSubmit(handleLogin)}
-          className='d-flex flex-column'>
-          <h1>Sign in</h1>
+        <div className='row justify-content-center mt-5'>
+          <div className='col-md-6'>
+            <form
+              onSubmit={handleSubmit(handleLogin)}
+              className='border p-4 rounded-3 shadow-sm'>
+              <h1 className='mb-4 text-center'>Sign in</h1>
 
-          <Error error={error} />
+              <Error error={error} />
 
-          <LabelInput
-            label='email'
-            type='text'
-            name='email'
-            data-cy='email_input'
-            placeholder='your@email.com'
-            validationRules={validationRules.email}
-          />
+              <LabelInput
+                label='Email'
+                type='text'
+                name='email'
+                data-cy='email_input'
+                placeholder='your@email.com'
+                validationRules={validationRules.email}
+              />
 
-          <LabelInput
-            label='password'
-            type='password'
-            name='password'
-            data-cy='password_input'
-            validationRules={validationRules.password}
-          />
+              <LabelInput
+                label='Password'
+                type='password'
+                name='password'
+                data-cy='password_input'
+                validationRules={validationRules.password}
+              />
 
-          <div className='clearfix'>
-            <div className='btn-group float-end'>
-              <button
-                type='submit'
-                className='btn btn-primary'
-                data-cy='submit_btn'
-                disabled={loading}
-              >
-                Sign in
-              </button>
-
-              <button
-                type='button'
-                className='btn btn-light'
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-            </div>
+              <div className='d-grid gap-2'>
+                <button
+                  type='submit'
+                  className='btn btn-success'
+                  data-cy='submit_btn'
+                  disabled={loading}
+                >
+                  Inloggen
+                </button>
+                
+                <div className="text-center pt-3">
+                  Nog geen account?
+                </div>
+                
+                <button
+                  type='button'
+                  className='btn btn-success btn-light'
+                >
+                  <Link className="nav-link" to="/register">Registreren</Link>
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </FormProvider>
   );

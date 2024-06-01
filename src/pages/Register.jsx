@@ -4,22 +4,38 @@ import { FormProvider, useForm } from 'react-hook-form';
 import LabelInput from '../components/LabelInput';
 import { useAuth } from '../contexts/Auth.context';
 import Error from '../components/Error';
-import AsyncData from '../components/AsyncData';
 
 export default function Register() {
-  const { error, loading, register } = useAuth();
+  const { error, loading, register: registerUser } = useAuth();
   const navigate = useNavigate();
-
   const methods = useForm();
-  const { getValues, handleSubmit, reset } = methods;
+  const { handleSubmit, getValues } = methods;
 
-  const handleCancel = useCallback(() => {
-    reset();
-  }, [reset]);
+  const validationRules = useMemo(() => ({
+    voornaam: {
+      required: 'Voornaam is verplicht',
+    },
+    achternaam: {
+      required: 'Achternaam is verplicht',
+    },
+    email: {
+      required: 'Email is verplicht',
+    },
+    password: {
+      required: 'Wachtwoord is verplicht',
+    },
+    confirmPassword: {
+      required: 'Wachtwoord herhalen is verplicht',
+      validate: (value) => {
+        const password = getValues('password');
+        return password === value || 'Wachtwoorden zijn niet gelijk';
+      },
+    },
+  }), [getValues]);
 
   const handleRegister = useCallback(
-    async ({ user, email, password, image, video, info}) => {
-      const loggedIn = await register({ user, email, password, image, video, info});
+    async ({ voornaam, achternaam, email, password, image, video, info }) => {
+      const loggedIn = await registerUser({ user: `${voornaam} ${achternaam}`, email, password, image, video, info });
 
       if (loggedIn) {
         navigate({
@@ -28,125 +44,65 @@ export default function Register() {
         });
       }
     },
-    [register, navigate],
+    [registerUser, navigate]
   );
-
-  const validationRules = useMemo(() => ({
-    user: {
-      required: 'Name is required',
-    },
-    email: {
-      required: 'Email is required',
-    },
-    password: {
-      required: 'Password is required',
-    },
-    confirmPassword: {
-      required: 'Password confirmation is required',
-      validate: (value) => {
-        const password = getValues('password');
-        return password === value || 'Passwords do not match';
-      },
-    },
-    image: {
-        required: 'Image is required',
-    },
-    video: {
-        required: 'Video is required',
-    },
-    info: {
-        required: 'Info is required',
-    },
-    interests: {
-      required: 'Select at least one interest',
-    },
-  }), [getValues]);
 
   return (
     <FormProvider {...methods}>
-      <div>
-        <form
-          className='d-flex flex-column'
-          onSubmit={handleSubmit(handleRegister)}
-        >
-          <h1>Register</h1>
+      <div className='container'>
+        <div className='row justify-content-center mt-5'>
+          <div className='col-md-6'>
+            <form className='border p-4 rounded-3 shadow-sm' onSubmit={handleSubmit(handleRegister)}>
+              <h1 className='mb-4 text-center'>Register</h1>
 
-          <Error error={error} />
+              <Error error={error} />
 
-          <LabelInput
-            label='User'
-            type='text'
-            name='user'
-            placeholder='Your Username'
-            validationRules={validationRules.user}
-          />
+              <LabelInput
+                label='Voornaam'
+                type='text'
+                name='voornaam'
+                validationRules={validationRules.voornaam}
+              />
 
-          <LabelInput
-            label='Email'
-            type='text'
-            name='email'
-            placeholder='your@email.com'
-            validationRules={validationRules.email}
-          />
+              <LabelInput
+                label='Achternaam'
+                type='text'
+                name='achternaam'
+                validationRules={validationRules.achternaam}
+              />
 
-          <LabelInput
-            label='Password'
-            type='password'
-            name='password'
-            validationRules={validationRules.password}
-          />
+              <LabelInput
+                label='Email'
+                type='text'
+                name='email'
+                placeholder='your@email.com'
+                validationRules={validationRules.email}
+              />
 
-          <LabelInput
-            label='Confirm password'
-            type='password'
-            name='confirmPassword'
-            validationRules={validationRules.confirmPassword}
-          />
+              <LabelInput
+                label='Wachtwoord'
+                type='password'
+                name='password'
+                validationRules={validationRules.password}
+              />
 
-          <LabelInput
-            label='Image'
-            type='text'
-            name='image'
-            placeholder='an image of yourself'
-            validationRules={validationRules.image}
-          />
+              <LabelInput
+                label='Bevestig wachtwoord'
+                type='password'
+                name='confirmPassword'
+                validationRules={validationRules.confirmPassword}
+              />
 
-           <LabelInput
-            label='Video'
-            type='text'
-            name='video'
-            placeholder='a video of yourself'
-            validationRules={validationRules.video}
-          />
-
-            <LabelInput
-            label='Info'
-            type='text'
-            name='info'
-            placeholder='some information about yourself'
-            validationRules={validationRules.info}
-          />
-
-          <div className='clearfix'>
-            <div className='btn-group float-end'>
-              <button
-                type='submit'
-                className='btn btn-primary'
-                disabled={loading}
-              >
-                Register
-              </button>
-
-              <button
-                type='button'
-                className='btn btn-light'
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-            </div>
+              <div className='clearfix'>
+                <div className='btn-group float-end'>
+                  <button type='submit' className='btn btn-success' disabled={loading}>
+                    Register
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </FormProvider>
   );
