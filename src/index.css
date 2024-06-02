@@ -37,11 +37,11 @@ code {
 }
 
 .btn-1 {
-  background-position: top left;
+  background-position: bottom left;
 }
 
 .btn-2 {
-  background-position: bottom left;
+  background-position: top left;
 }
 
 .btn-3 {
