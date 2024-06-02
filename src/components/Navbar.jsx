@@ -18,18 +18,18 @@ export default function Navbar() {
 
           <div className="nav-item my-2 mx-sm-3 my-sm-0">
             <Link className="nav-link" to="/login">
-                <i className="bi bi-person-circle" />
+                <i className="bi bi-person-circle fs-3" />
               </Link>
           </div>
 
         )
         }
         <div className="nav-item my-2 mx-sm-3 my-sm-0">
-          <Link className="nav-link" to="/home">Home</Link>
+          <Link className="nav-link" to="/home"><h3>AutoCook</h3></Link>
         </div>
         <div className="nav-item my-2 mx-sm-3 my-sm-0">
         <Link className="nav-link" to="/basket">
-            <i className="bi bi-cart2" />
+            <i className="bi bi-cart2 fs-3" />
           </Link>
         </div>
       </div>

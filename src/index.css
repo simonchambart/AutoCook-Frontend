@@ -13,11 +13,37 @@ code {
 }
 
 .circular-button {
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
+  background-size: 505px 505px; /* Adjust according to your image size */
+  background-repeat: no-repeat;
+  border: none;
 }
 
 .bg-yellow {
   background-color: #FFC107 !important;
+}
+
+.higher-buttons {
+  margin-top: 20px; /* Adjust this value to set how much higher you want the buttons */
+}
+
+.title-under {
+  margin-top: 150px; /* Adjust this value to set how much higher you want the buttons */
+}
+
+.btn-1 {
+  background-position: top left;
+}
+
+.btn-2 {
+  background-position: bottom left;
+}
+
+.btn-3 {
+  background-position: bottom right;
 }
