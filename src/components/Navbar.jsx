@@ -25,7 +25,7 @@ export default function Navbar() {
         )
         }
         <div className="nav-item my-2 mx-sm-3 my-sm-0">
-          <Link className="nav-link" to="/home">Logo</Link>
+          <Link className="nav-link" to="/home">Home</Link>
         </div>
         <div className="nav-item my-2 mx-sm-3 my-sm-0">
         <Link className="nav-link" to="/basket">
