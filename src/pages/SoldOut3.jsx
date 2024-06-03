@@ -1,18 +1,9 @@
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
+import { Link } from 'react-router-dom';
 
-function Home() {
-  const [email, setEmail] = useState('');
-  const [isRegistered, setIsRegistered] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Hier kun je de logica toevoegen om het emailadres te verwerken, bijvoorbeeld een API-aanroep om de registratie te voltooien
-    setEmail('');
-    setIsRegistered(true);
-  };
-
+function Soldout3() {
+ 
   return (
     <div className="container mt-5">
       <h1 className="mb-4 text-center">Gepersonaliseerde Maaltijden</h1>
@@ -22,27 +13,11 @@ function Home() {
             Wij zijn helaas volledig uitverkocht, ontvang 25% korting op uw volgende aankoop ter compensatie bij registratie van een account.
           </div>
           <div className="text-center mt-3">
-            <form onSubmit={handleSubmit} className="d-flex justify-content-center align-items-center flex-column">
               <div className="d-flex w-100 justify-content-center mb-2">
-                <input
-                  type="email"
-                  className="form-control me-2"
-                  placeholder="Voer uw e-mailadres in"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  style={{ maxWidth: '300px' }}
-                />
-                <button type="submit" className="btn btn-success">
-                  Registreer
+                <button type="button" className="btn btn-success">
+                <Link className="nav-link" to="/register">Registreer</Link>
                 </button>
               </div>
-              {isRegistered && (
-                <div className="text-success mt-2">
-                  U bent geregistreerd.
-                </div>
-              )}
-            </form>
           </div>
         </div>
       </div>
@@ -50,4 +25,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Soldout3;
