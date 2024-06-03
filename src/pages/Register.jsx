@@ -6,8 +6,9 @@ import { useAuth } from '../contexts/Auth.context';
 import Error from '../components/Error';
 
 export default function Register() {
-  const { error, loading, register: registerUser } = useAuth();
+  const { error, loading, register } = useAuth();
   const navigate = useNavigate();
+
   const methods = useForm();
   const { handleSubmit, getValues } = methods;
 
@@ -21,7 +22,7 @@ export default function Register() {
     email: {
       required: 'Email is verplicht',
     },
-    password: {
+    wachtwoord: {
       required: 'Wachtwoord is verplicht',
     },
     confirmPassword: {
@@ -34,8 +35,8 @@ export default function Register() {
   }), [getValues]);
 
   const handleRegister = useCallback(
-    async ({ voornaam, achternaam, email, password, image, video, info }) => {
-      const loggedIn = await registerUser({ user: `${voornaam} ${achternaam}`, email, password, image, video, info });
+    async ({ voornaam, achternaam, email, password}) => {
+      const loggedIn = await register({ voornaam, achternaam, email, password});
 
       if (loggedIn) {
         navigate({
@@ -44,7 +45,7 @@ export default function Register() {
         });
       }
     },
-    [registerUser, navigate]
+    [register, navigate]
   );
 
   return (

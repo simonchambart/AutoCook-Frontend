@@ -10,16 +10,16 @@ import {
   import * as api from '../api/index.js';
   
   const JWT_TOKEN_KEY = 'jwtToken';
-  const CREATOR_ID_KEY = 'creatorId';
+  const ACCOUNT_ID_KEY = 'accountId';
   const AuthContext = createContext();
   
   export const useAuth = () => useContext(AuthContext);
   
-  export const AuthProvider = ({ children }) => {
+  export function AuthProvider({ children }) {
     const [ready, setReady] = useState(false);
     const [isAuthed, setIsAuthed] = useState(false);
     const [token, setToken] = useState(localStorage.getItem(JWT_TOKEN_KEY));
-    const [creator, setCreator] = useState(null);
+    const [account, setAccount] = useState(null);
 
 
     useEffect(() => {
@@ -32,21 +32,21 @@ import {
       isMutating: loginLoading,
       error: loginError,
       trigger: doLogin,
-    } = useSWRMutation('creators/login', api.post);
+    } = useSWRMutation('accounts/login', api.post);
 
     const {
       isMutating: registerLoading,
       error: registerError,
       trigger: doRegister,
-    } = useSWRMutation('creators/register', api.post);
+    } = useSWRMutation('accounts/register', api.post);
   
     const setSession = useCallback(
-      (token, creator) => {
+      (token, account) => {
         setToken(token);
-        setCreator(creator);
+        setAccount(account);
   
         localStorage.setItem(JWT_TOKEN_KEY, token);
-        localStorage.setItem(CREATOR_ID_KEY, creator.id);
+        localStorage.setItem(ACCOUNT_ID_KEY, account.id);
       },
       [],
     );
@@ -54,12 +54,12 @@ import {
     const login = useCallback(
       async (email, password) => {
         try {
-          const { token, creator } = await doLogin({
+          const { token, account } = await doLogin({
             email,
             password,
           });
   
-          setSession(token, creator);
+          setSession(token, account);
           return true;
         } catch (error) {
           console.error(error);
@@ -72,8 +72,8 @@ import {
     const register = useCallback(
       async (data) => {
         try {
-          const { token, creator } = await doRegister(data);
-          setSession(token, creator);
+          const { token, account } = await doRegister(data);
+          setSession(token, account);
           return true;
         } catch (error) {
           console.error(error);
@@ -85,16 +85,16 @@ import {
   
     const logout = useCallback(() => {
       setToken(null);
-      setCreator(null);
+      setAccount(null);
   
       localStorage.removeItem(JWT_TOKEN_KEY);
-      localStorage.removeItem(CREATOR_ID_KEY);
+      localStorage.removeItem(ACCOUNT_ID_KEY);
     }, []);
   
     const value = useMemo(
       () => ({
         token,
-        creator,
+        account,
         error: loginError || registerError,
         loading: loginLoading || registerLoading ,
         ready,
@@ -103,7 +103,7 @@ import {
         logout,
         register,
       }),
-      [token, creator, loginError, registerError, loginLoading, registerLoading, ready, isAuthed, login, logout, register]
+      [token, account, loginError, registerError, loginLoading, registerLoading, ready, isAuthed, login, logout, register]
     );
   
     return (
@@ -111,5 +111,5 @@ import {
         {children}
       </AuthContext.Provider>
     );
-  };
+  }
   
