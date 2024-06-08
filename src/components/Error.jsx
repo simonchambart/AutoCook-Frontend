@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types'; // Import PropTypes library
 import { isAxiosError } from 'axios';
 
 export default function Error({ error }) {
-
-    // Als het het axios-fouts is voert hij deze statement uit
+    // If it's an axios error, execute this statement
   if (isAxiosError(error)) { 
     return (
       <div className="alert alert-danger">
@@ -22,7 +22,7 @@ export default function Error({ error }) {
     );
   }
 
-  // Als het een andere error is dan voert hij deze statement uit
+  // If it's another error, execute this statement
   if (error) {
     return (
       <div className="alert alert-danger">
@@ -32,7 +32,11 @@ export default function Error({ error }) {
     );
   }
 
-
-  // Als er geen error is dan wordt er geen 'error message' getoond op het scherm 
+  // If there is no error, do not display an error message on the screen
   return null; 
 }
+
+// Define prop types for Error component
+Error.propTypes = {
+  error: PropTypes.object, // Define the error prop type as an object
+};

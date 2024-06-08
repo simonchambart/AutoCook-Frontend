@@ -8,9 +8,9 @@ export const axios = axiosRoot.create({
 
 export const setAuthToken = (token) => {
   if (token) {
-    axios.defaults.headers['Authorization'] = `Bearer ${token}`; 
+    axios.defaults.headers.Authorization = `Bearer ${token}`; 
   } else {
-    delete axios.defaults.headers['Authorization'];
+    delete axios.defaults.headers.Authorization;
   }
 };
 
@@ -49,4 +49,9 @@ export const getById = async (url) => {
   } = await axios.get(url);
 
   return data;
+};
+
+// Function to record clicks
+export const recordClick = async (clickDetail) => {
+  await post('/clicks', { arg: { clickDetails: [clickDetail], createdAt: new Date().toISOString() } });
 };
