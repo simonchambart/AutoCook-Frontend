@@ -2,7 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 import { Link } from 'react-router-dom';
 import MealsMenu from '../assets/Meals Menu.jpg';
-import backgroundImg from '../assets/ingredients_background.jpg'; // Importeer de afbeelding
+import backgroundImg from '../assets/ingredients_background.jpg';
+import { recordClick } from '../api/index';
+
+const handleClick = (clickDetail) => {
+  recordClick(clickDetail);
+};
 
 function Home() {
   return (
@@ -16,6 +21,7 @@ function Home() {
                 to="/soldout1"
                 className="circular-button mb-2 btn-1"
                 style={{ backgroundImage: `url(${MealsMenu})` }}
+                onClick={() => handleClick('Gewone Maaltijden')}
                />
               <h2>Gewone</h2>
               <h2> Maaltijden</h2>
@@ -25,6 +31,7 @@ function Home() {
                 to="/soldout2"
                 className="circular-button mb-2 btn-2"
                 style={{ backgroundImage: `url(${MealsMenu})` }}
+                onClick={() => handleClick('Dieet Maaltijden')}
                />
               <h2>Dieet</h2>
               <h2>Maaltijden</h2>
@@ -34,6 +41,7 @@ function Home() {
                 to="/soldout3"
                 className="circular-button mb-2 btn-3"
                 style={{ backgroundImage: `url(${MealsMenu})` }}
+                onClick={() => handleClick('Gepersonaliseerde Maaltijden')}
                />
               <h2>Gepersonaliseerde</h2>
               <h2> Maaltijden</h2>

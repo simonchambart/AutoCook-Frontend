@@ -4,6 +4,11 @@ import { FormProvider, useForm } from 'react-hook-form';
 import LabelInput from '../components/LabelInput';
 import { useAuth } from '../contexts/Auth.context';
 import Error from '../components/Error';
+import { recordClick } from '../api/index';
+
+const handleClick = (clickDetail) => {
+  recordClick(clickDetail);
+};
 
 export default function Register() {
   const { error, loading, register } = useAuth();
@@ -96,7 +101,7 @@ export default function Register() {
 
               <div className='clearfix'>
                 <div className='btn-group float-end'>
-                  <button type='submit' className='btn btn-success' disabled={loading}>
+                  <button type='submit' className='btn btn-success' disabled={loading} onClick={() => handleClick('Registreren Bevestigen')}>
                     Register
                   </button>
                 </div>

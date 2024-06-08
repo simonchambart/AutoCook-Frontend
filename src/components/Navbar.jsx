@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth.context';
-import { recordClick } from '../api/index'; // Import the recordClick function
+import { recordClick } from '../api/index';
 
 export default function Navbar() {
   const { isAuthed } = useAuth();
 
   const handleClick = (clickDetail) => {
-    recordClick(clickDetail); // Call recordClick function to register the click
+    recordClick(clickDetail);
   };
 
   return (

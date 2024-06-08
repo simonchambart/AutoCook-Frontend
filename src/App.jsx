@@ -7,6 +7,9 @@ import router from './router'; // Import router
 
 function App() {
   useEffect(() => {
+    // Record a click when the user opens the site
+    recordClick('homepage');
+
     const handleClick = (event) => {
       const { id } = event.target;
       if (id) {

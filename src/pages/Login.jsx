@@ -5,6 +5,11 @@ import LabelInput from '../components/LabelInput';
 import { useAuth } from '../contexts/Auth.context';
 import Error from '../components/Error';
 import '../index.css';
+import { recordClick } from '../api/index';
+
+const handleClick = (clickDetail) => {
+  recordClick(clickDetail);
+};
 
 const validationRules = {
   email: {
@@ -76,6 +81,7 @@ export default function Login() {
                   className='btn btn-success'
                   data-cy='submit_btn'
                   disabled={loading}
+                  onClick={() => handleClick('Inloggen Bevestigen')}
                 >
                   Inloggen
                 </button>
@@ -88,7 +94,7 @@ export default function Login() {
                   type='button'
                   className='btn btn-success btn-light'
                 >
-                  <Link className="nav-link" to="/register">Registreren</Link>
+                  <Link className="nav-link" to="/register" onClick={() => handleClick('Registreren Navigatie Vanuit Login Form')}>Registreren</Link>
                 </button>
               </div>
             </form>
