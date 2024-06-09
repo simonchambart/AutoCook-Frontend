@@ -10,7 +10,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar p-4 sticky-top text-white bg-success">
+    <nav className="navbar sticky-top text-white bg-success">
       <div className="container-fluid d-flex justify-content-between align-items-center">
         <div className="d-flex align-items-center">
           {

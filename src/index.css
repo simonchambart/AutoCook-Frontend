@@ -10,7 +10,7 @@ code {
 }
 
 .home-container {
-  background-image: url('../src/assets/ingredients_background.jpg');
+  background-image: url('../src/assets/white_background.jpg');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -18,8 +18,8 @@ code {
 
 @media (max-width: 768px) {
   .home-container {
-    background-image: url('../src/assets/ingredients_background_mobile.jpg');
-    background-size: 110vh;
+    background-image: url('../src/assets/white_background.jpg');
+    background-size: cover;
     background-position: center;
     min-height: 100vh;
   }
@@ -45,8 +45,8 @@ code {
 }
 
 .circular-button {
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
