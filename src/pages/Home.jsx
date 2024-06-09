@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 import { Link } from 'react-router-dom';
-import MealsMenu from '../assets/Meals Menu.jpg';
-import backgroundImg from '../assets/ingredients_background.jpg';
+import Spaghetti  from '../assets/Spaghetti.png';
+import  Steak from '../assets/Steak.png';
+import  Vegetables  from '../assets/Vegatables.png';
 import { recordClick } from '../api/index';
 
 const handleClick = (clickDetail) => {
@@ -11,18 +12,18 @@ const handleClick = (clickDetail) => {
 
 function Home() {
   return (
-    <div style={{ backgroundImage: `url(${backgroundImg})`, backgroundSize: '115%', backgroundPosition: 'center', minHeight: '100vh' }}>
+    <div className="home-container">
       <div className="pt-5">
         <h1 className="text-center title-under">Neem Uw Voorkeur Maaltijden</h1>
         <div className="d-flex justify-content-center align-items-center">
-          <div className="d-flex flex-row align-items-center higher-buttons">
+          <div className="button-container d-flex flex-row align-items-center higher-buttons">
             <div className="text-center mx-3">
               <Link
                 to="/soldout1"
                 className="circular-button mb-2 btn-1"
-                style={{ backgroundImage: `url(${MealsMenu})` }}
+                style={{ backgroundImage: `url(${Spaghetti})` }}
                 onClick={() => handleClick('Gewone Maaltijden')}
-               />
+              />
               <h2>Gewone</h2>
               <h2> Maaltijden</h2>
             </div>
@@ -30,9 +31,9 @@ function Home() {
               <Link
                 to="/soldout2"
                 className="circular-button mb-2 btn-2"
-                style={{ backgroundImage: `url(${MealsMenu})` }}
+                style={{ backgroundImage: `url(${Vegetables})` }}
                 onClick={() => handleClick('Dieet Maaltijden')}
-               />
+              />
               <h2>Dieet</h2>
               <h2>Maaltijden</h2>
             </div>
@@ -40,9 +41,9 @@ function Home() {
               <Link
                 to="/soldout3"
                 className="circular-button mb-2 btn-3"
-                style={{ backgroundImage: `url(${MealsMenu})` }}
+                style={{ backgroundImage: `url(${Steak})` }}
                 onClick={() => handleClick('Gepersonaliseerde Maaltijden')}
-               />
+              />
               <h2>Gepersonaliseerde</h2>
               <h2> Maaltijden</h2>
             </div>

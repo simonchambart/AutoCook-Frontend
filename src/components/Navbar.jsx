@@ -11,29 +11,35 @@ export default function Navbar() {
 
   return (
     <nav className="navbar p-4 sticky-top text-white bg-success">
-      <div className="container-fluid flex-column flex-sm-row align-items-start align-items-sm-center">
-        {
-          isAuthed
-          ? (
-            <div className="nav-item my-2 mx-sm-3 my-sm-0">
-              <Link className="nav-link" to="/logout" onClick={() => handleClick('Logout')}>Logout</Link>
-            </div>
-          )
-          : (
-            <div className="nav-item my-2 mx-sm-3 my-sm-0">
-              <Link className="nav-link" to="/login" onClick={() => handleClick('Login')}>
-                <i className="bi bi-person-circle fs-3" />
-              </Link>
-            </div>
-          )
-        }
-        <div className="nav-item my-2 mx-sm-3 my-sm-0">
-          <Link className="nav-link" to="/home" onClick={() => handleClick('AutoCook')}><h3>AutoCook</h3></Link>
+      <div className="container-fluid d-flex justify-content-between align-items-center">
+        <div className="d-flex align-items-center">
+          {
+            isAuthed
+            ? (
+              <div className="nav-item">
+                <Link className="nav-link" to="/logout" onClick={() => handleClick('Logout')}>Logout</Link>
+              </div>
+            )
+            : (
+              <div className="nav-item">
+                <Link className="nav-link" to="/login" onClick={() => handleClick('Login')}>
+                  <i className="bi bi-person-circle fs-3" />
+                </Link>
+              </div>
+            )
+          }
         </div>
-        <div className="nav-item my-2 mx-sm-3 my-sm-0">
-          <Link className="nav-link" to="/basket" onClick={() => handleClick('Basket')}>
-            <i className="bi bi-cart2 fs-3" />
-          </Link>
+        <div className="d-flex align-items-center">
+          <div className="nav-item">
+            <Link className="nav-link" to="/home" onClick={() => handleClick('AutoCook')}><h3>AutoCook</h3></Link>
+          </div>
+        </div>
+        <div className="d-flex align-items-center">
+          <div className="nav-item">
+            <Link className="nav-link" to="/basket" onClick={() => handleClick('Basket')}>
+              <i className="bi bi-cart2 fs-3" />
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

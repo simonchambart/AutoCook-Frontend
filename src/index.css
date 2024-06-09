@@ -1,15 +1,47 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.home-container {
+  background-image: url('../src/assets/ingredients_background.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    background-image: url('../src/assets/ingredients_background_mobile.jpg');
+    background-size: 110vh;
+    background-position: center;
+    min-height: 100vh;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .circular-button {
+    width: 150px;
+    height: 150px;
+  }
+
+  .title-under {
+    font-size: 1.5rem;
+    margin-top: 100px;
+  }
+
+  .higher-buttons {
+    margin-top: 10px;
+  }
 }
 
 .circular-button {
@@ -19,7 +51,7 @@ code {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-size: 505px 505px; /* Adjust according to your image size */
+  background-size: 200%; /* Ensure the image covers the entire button */
   background-repeat: no-repeat;
   border: none;
 }
@@ -37,13 +69,13 @@ code {
 }
 
 .btn-1 {
-  background-position: bottom left;
+  background-position: center; /* Center the background image */
 }
 
 .btn-2 {
-  background-position: top left;
+  background-position: center; /* Center the background image */
 }
 
 .btn-3 {
-  background-position: bottom right;
+  background-position: center; /* Center the background image */
 }
