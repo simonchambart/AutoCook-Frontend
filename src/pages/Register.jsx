@@ -54,6 +54,7 @@ export default function Register() {
   );
 
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <FormProvider {...methods}>
       <div className='container'>
         <div className='row justify-content-center mt-5'>
